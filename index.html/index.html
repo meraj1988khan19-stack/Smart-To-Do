@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="A modern, fast and responsive task management application."
+    >
+
+    <meta name="theme-color" content="#08080c">
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%238b7cff'/%3E%3Cpath d='M18 32l9 9 19-19' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    >
+
+    <title>TaskFlow — Smart To-Do</title>
+
+    <!-- =========================================
+         STYLES
+    ========================================== -->
+
+    <link rel="stylesheet" href="./animation.css">
+    <link rel="stylesheet" href="./responsive.css">
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =========================================
+         APP ROOT
+    ========================================== -->
+
+    <div id="app" class="app">
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <!-- Logo -->
+
+            <div class="brand">
+
+                <a
+                    href="#"
+                    class="brand__link"
+                    aria-label="TaskFlow Home"
+                >
+
+                    <span
+                        class="brand__icon"
+                        aria-hidden="true"
+                    >
+
+                        <svg
+                            viewBox="0 0 48 48"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+
+                            <rect
+                                x="4"
+                                y="4"
+                                width="40"
+                                height="40"
+                                rx="12"
+                                fill="currentColor"
+                            />
+
+                            <path
+                                d="M15 24.5L21 30L33 17.5"
+                                stroke="white"
+                                stroke-width="4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+
+                    <span class="brand__name">
+                        TaskFlow
+                    </span>
+
+                </a>
+
+
+                <!-- Mobile Sidebar Close -->
+
+                <button
+                    type="button"
+                    class="icon-button sidebar__close"
+                    id="sidebarClose"
+                    aria-label="Close navigation"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M6 6L18 18M18 6L6 18"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 NAVIGATION
+            ================================== -->
+
+            <nav
+                class="navigation"
+                aria-label="Main navigation"
+            >
+
+                <p class="navigation__label">
+                    Workspace
+                </p>
+
+
+                <!-- All Tasks -->
+
+                <button
+                    type="button"
+                    class="nav-item nav-item--active"
+                    data-view="all"
+                >
+
+                    <span class="nav-item__icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+
+                            <rect
+                                x="4"
+                                y="4"
+                                width="6"
+                                height="6"
+                                rx="1.5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <rect
+                                x="14"
+                                y="4"
+                                width="6"
+                                height="6"
+                                rx="1.5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <rect
+                                x="4"
+                                y="14"
+                                width="6"
+                                height="6"
+                                rx="1.5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <rect
+                                x="14"
+                                y="14"
+                                width="6"
+                                height="6"
+                                rx="1.5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                        </svg>
+
+                    </span>
+
+
+                    <span class="nav-item__text">
+                        All Tasks
+                    </span>
+
+
+                    <span
+                        class="nav-item__count"
+                        id="allTasksCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <!-- Today -->
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-view="today"
+                >
+
+                    <span class="nav-item__icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2.5"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 3V7M16 3V7M4 10H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M8 14H8.01M12 14H12.01M16 14H16.01"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+
+                    <span class="nav-item__text">
+                        Today
+                    </span>
+
+
+                    <span
+                        class="nav-item__count"
+                        id="todayTasksCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <!-- Upcoming -->
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-view="upcoming"
+                >
+
+                    <span class="nav-item__icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M12 6V12L16 14"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="8"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                        </svg>
+
+                    </span>
+
+
+                    <span class="nav-item__text">
+                        Upcoming
+                    </span>
+
+
+                    <span
+                        class="nav-item__count"
+                        id="upcomingTasksCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <!-- Completed -->
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-view="completed"
+                >
+
+                    <span class="nav-item__icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="8"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 12L10.8 14.8L16.5 9"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+
+                    <span class="nav-item__text">
+                        Completed
+                    </span>
+
+
+                    <span
+                        class="nav-item__count"
+                        id="completedTasksCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- =================================
+                 SIDEBAR BOTTOM
+            ================================== -->
+
+            <div class="sidebar__bottom">
+
+
+                <!-- Productivity -->
+
+                <div class="sidebar__progress">
+
+                    <div class="sidebar__progress-header">
+
+                        <span>
+                            Productivity
+                        </span>
+
+                        <span id="productivityPercentage">
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-bar__fill"
+                            id="productivityProgress"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Settings -->
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-action="settings"
+                >
+
+                    <span class="nav-item__icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M12 15.2A3.2 3.2 0 1 0 12 8.8A3.2 3.2 0 0 0 12 15.2Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M19.4 15A1.7 1.7 0 0 0 19.7 16.9L19.8 17.1L17.1 19.8L16.9 19.7A1.7 1.7 0 0 0 15 19.4A1.7 1.7 0 0 0 13.8 21V21.2H10.2V21A1.7 1.7 0 0 0 9 19.4A1.7 1.7 0 0 0 7.1 19.7L6.9 19.8L4.2 17.1L4.3 16.9A1.7 1.7 0 0 0 4.6 15A1.7 1.7 0 0 0 3 13.8H2.8V10.2H3A1.7 1.7 0 0 0 4.6 9A1.7 1.7 0 0 0 4.3 7.1L4.2 6.9L6.9 4.2L7.1 4.3A1.7 1.7 0 0 0 9 4.6A1.7 1.7 0 0 0 10.2 3V2.8H13.8V3A1.7 1.7 0 0 0 15 4.6A1.7 1.7 0 0 0 16.9 4.3L17.1 4.2L19.8 6.9L19.7 7.1A1.7 1.7 0 0 0 19.4 9A1.7 1.7 0 0 0 21 10.2H21.2V13.8H21A1.7 1.7 0 0 0 19.4 15Z"
+                                stroke="currentColor"
+                                stroke-width="1.4"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+
+                    <span class="nav-item__text">
+                        Settings
+                    </span>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================
+             SIDEBAR OVERLAY
+        ====================================== -->
+
+        <div
+            class="sidebar-overlay"
+            id="sidebarOverlay"
+            aria-hidden="true"
+        ></div>
+
+
+        <!-- =====================================
+             MAIN CONTENT SHELL
+        ====================================== -->
+
+        <div class="main-shell">
+
+
+            <!-- =================================
+                 MAIN
+            ================================== -->
+
+            <main class="main">
+
+
+                <!-- =================================
+                     TOPBAR
+                ================================== -->
+
+                <header class="topbar">
+
+
+                    <!-- Mobile Menu -->
+
+                    <button
+                        type="button"
+                        class="icon-button menu-button"
+                        id="menuButton"
+                        aria-label="Open navigation"
+                        aria-controls="sidebar"
+                        aria-expanded="false"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M4 7H20M4 12H20M4 17H20"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </button>
+
+
+                    <!-- Topbar Actions -->
+
+                    <div class="topbar__actions">
+
+
+                        <!-- Search -->
+
+                        <button
+                            type="button"
+                            class="icon-button"
+                            id="focusSearchButton"
+                            aria-label="Search tasks"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    cx="11"
+                                    cy="11"
+                                    r="6.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+
+                                <path
+                                    d="M16 16L20 20"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </button>
+
+
+                        <!-- Theme -->
+
+                        <button
+                            type="button"
+                            class="icon-button"
+                            id="themeButton"
+                            aria-label="Toggle theme"
+                        >
+
+                            <svg
+                                class="theme-icon theme-icon--sun"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <path
+                                    d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+                <!-- =================================
+                     CONTENT
+                ================================== -->
+
+                <div class="content">
+
+
+                    <!-- Page Heading -->
+
+                    <section class="page-heading">
+
+                        <div>
+
+                            <p
+                                class="page-heading__eyebrow"
+                                id="currentDate"
+                            >
+                                Today
+                            </p>
+
+
+                            <h1 class="page-heading__title">
+                                My Tasks
+                            </h1>
+
+
+                            <p class="page-heading__subtitle">
+                                Stay focused. Get things done.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Add Task -->
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            id="addTaskButton"
+                        >
+
+                            <span class="primary-button__icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M12 5V19M5 12H19"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                            <span>
+                                Add Task
+                            </span>
+
+                        </button>
+
+                    </section>
+
+
+                    <!-- =================================
+                         STATISTICS
+                    ================================== -->
+
+                    <section
+                        class="stats-grid"
+                        aria-label="Task statistics"
+                    >
+
+
+                        <!-- Total -->
+
+                        <article class="stat-card">
+
+                            <div
+                                class="stat-card__icon stat-card__icon--total"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M7 4H17C18.1 4 19 4.9 19 6V18C19 19.1 18.1 20 17 20H7C5.9 20 5 19.1 5 18V6C5 4.9 5.9 4 7 4Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+
+                                    <path
+                                        d="M8.5 9H15.5M8.5 13H15.5M8.5 17H12"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="stat-card__content">
+
+                                <span class="stat-card__label">
+                                    Total Tasks
+                                </span>
+
+                                <strong
+                                    class="stat-card__value"
+                                    id="totalTasks"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Pending -->
+
+                        <article class="stat-card">
+
+                            <div
+                                class="stat-card__icon stat-card__icon--pending"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="8"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+
+                                    <path
+                                        d="M12 7V12L15 14"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="stat-card__content">
+
+                                <span class="stat-card__label">
+                                    Pending
+                                </span>
+
+                                <strong
+                                    class="stat-card__value"
+                                    id="pendingTasks"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Completed -->
+
+                        <article class="stat-card">
+
+                            <div
+                                class="stat-card__icon stat-card__icon--completed"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="8"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+
+                                    <path
+                                        d="M8.5 12L11 14.5L16 9.5"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="stat-card__content">
+
+                                <span class="stat-card__label">
+                                    Completed
+                                </span>
+
+                                <strong
+                                    class="stat-card__value"
+                                    id="completedTasks"
+                                >
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Progress -->
+
+                        <article class="stat-card">
+
+                            <div
+                                class="stat-card__icon stat-card__icon--progress"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M5 18L9 13L12 16L19 7"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+
+                                    <path
+                                        d="M16 7H19V10"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="stat-card__content">
+
+                                <span class="stat-card__label">
+                                    Progress
+                                </span>
+
+                                <strong
+                                    class="stat-card__value"
+                                    id="progressPercentage"
+                                >
+                                    0%
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+                    </section>
+
+
+                    <!-- =================================
+                         TASK TOOLBAR
+                    ================================== -->
+
+                    <section class="task-toolbar">
+
+
+                        <!-- Search -->
+
+                        <div class="search-box">
+
+                            <span class="search-box__icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <circle
+                                        cx="11"
+                                        cy="11"
+                                        r="6.5"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+
+                                    <path
+                                        d="M16 16L20 20"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                            <input
+                                type="search"
+                                id="searchInput"
+                                class="search-box__input"
+                                placeholder="Search your tasks..."
+                                autocomplete="off"
+                                aria-label="Search tasks"
+                            >
+
+
+                            <button
+                                type="button"
+                                class="search-box__clear"
+                                id="clearSearchButton"
+                                aria-label="Clear search"
+                                hidden
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M7 7L17 17M17 7L7 17"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- Filters -->
+
+                        <div
+                            class="filter-group"
+                            role="tablist"
+                            aria-label="Task filters"
+                        >
+
+                            <button
+                                type="button"
+                                class="filter-button filter-button--active"
+                                data-filter="all"
+                                role="tab"
+                                aria-selected="true"
+                            >
+                                All
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="filter-button"
+                                data-filter="active"
+                                role="tab"
+                                aria-selected="false"
+                            >
+                                Active
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="filter-button"
+                                data-filter="completed"
+                                role="tab"
+                                aria-selected="false"
+                            >
+                                Completed
+                            </button>
+
+                        </div>
+
+
+                        <!-- Sort -->
+
+                        <button
+                            type="button"
+                            class="sort-button"
+                            id="sortButton"
+                            aria-label="Sort tasks"
+                            aria-expanded="false"
+                            aria-haspopup="menu"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M8 6H20M8 12H17M8 18H14"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+
+                                <path
+                                    d="M4 6V18M4 18L2 16M4 18L6 16"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+
+                            <span>
+                                Sort
+                            </span>
+
+                        </button>
+
+                    </section>
+
+
+                    <!-- =================================
+                         TASK LIST
+                    ================================== -->
+
+                    <section
+                        class="tasks-section"
+                        aria-labelledby="tasksHeading"
+                    >
+
+
+                        <div class="tasks-section__header">
+
+                            <div>
+
+                                <h2
+                                    id="tasksHeading"
+                                    class="section-title"
+                                >
+                                    Your Tasks
+                                </h2>
+
+
+                                <p
+                                    class="section-subtitle"
+                                    id="taskListSubtitle"
+                                >
+                                    Keep moving forward.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Dynamic Task List -->
+
+                        <div
+                            class="task-list"
+                            id="taskList"
+                            aria-live="polite"
+                        ></div>
+
+
+                        <!-- =================================
+                             EMPTY STATE
+                        ================================== -->
+
+                        <div
+                            class="empty-state"
+                            id="emptyState"
+                            hidden
+                        >
+
+                            <div class="empty-state__illustration">
+
+                                <svg
+                                    viewBox="0 0 160 140"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                >
+
+                                    <rect
+                                        x="30"
+                                        y="18"
+                                        width="100"
+                                        height="104"
+                                        rx="16"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    />
+
+                                    <path
+                                        d="M55 52H105"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+
+                                    <path
+                                        d="M55 72H95"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+
+                                    <path
+                                        d="M55 92H82"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+
+                                    <circle
+                                        cx="112"
+                                        cy="102"
+                                        r="18"
+                                        fill="currentColor"
+                                    />
+
+                                    <path
+                                        d="M112 94V110M104 102H120"
+                                        stroke="white"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <h3 class="empty-state__title">
+                                No tasks yet
+                            </h3>
+
+
+                            <p class="empty-state__text">
+                                You're all clear. Add a task and start
+                                making progress.
+                            </p>
+
+
+                            <button
+                                type="button"
+                                class="primary-button primary-button--small"
+                                id="emptyAddTaskButton"
+                            >
+
+                                <span class="primary-button__icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        aria-hidden="true"
+                                    >
+
+                                        <path
+                                            d="M12 5V19M5 12H19"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                        />
+
+                                    </svg>
+
+                                </span>
+
+                                Add your first task
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- =================================
+                             NO SEARCH RESULTS
+                        ================================== -->
+
+                        <div
+                            class="empty-state empty-state--search"
+                            id="noResultsState"
+                            hidden
+                        >
+
+                            <div class="empty-state__illustration">
+
+                                <svg
+                                    viewBox="0 0 120 120"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+
+                                    <circle
+                                        cx="52"
+                                        cy="52"
+                                        r="30"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    />
+
+                                    <path
+                                        d="M74 74L99 99"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                    />
+
+                                    <path
+                                        d="M42 52H62"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <h3 class="empty-state__title">
+                                No matching tasks
+                            </h3>
+
+
+                            <p class="empty-state__text">
+                                Try a different search term or filter.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+
+            <!-- =================================
+                 FOOTER
+            ================================== -->
+
+            <footer class="footer">
+
+                <div class="footer__inner">
+
+
+                    <!-- Footer Brand -->
+
+                    <div class="footer__brand">
+
+                        <span
+                            class="footer__logo"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 48 48"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+
+                                <rect
+                                    x="4"
+                                    y="4"
+                                    width="40"
+                                    height="40"
+                                    rx="12"
+                                    fill="currentColor"
+                                />
+
+                                <path
+                                    d="M15 24.5L21 30L33 17.5"
+                                    stroke="white"
+                                    stroke-width="4"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                        </span>
+
+
+                        <span>
+                            TaskFlow
+                        </span>
+
+                    </div>
+
+
+                    <!-- Copyright -->
+
+                    <div class="footer__copyright">
+                        © 2026 TaskFlow. All rights reserved.
+                    </div>
+
+
+                    <!-- Creator -->
+
+                    <div class="footer__creator">
+
+                        Crafted with
+
+                        <span
+                            class="footer__heart"
+                            aria-label="love"
+                        >
+                            ♥
+                        </span>
+
+                        by
+
+                        <strong>
+                            Muzammil Khan
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </footer>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         ADD / EDIT TASK MODAL
+    ========================================== -->
+
+    <div
+        class="modal"
+        id="taskModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="taskModalTitle"
+        hidden
+    >
+
+        <div
+            class="modal__backdrop"
+            data-modal-close
+        ></div>
+
+
+        <div class="modal__container">
+
+
+            <div class="modal__header">
+
+                <div>
+
+                    <p class="modal__eyebrow">
+                        Task Manager
+                    </p>
+
+
+                    <h2
+                        class="modal__title"
+                        id="taskModalTitle"
+                    >
+                        Create New Task
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="icon-button"
+                    id="closeTaskModal"
+                    aria-label="Close task dialog"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M6 6L18 18M18 6L6 18"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- Task Form -->
+
+            <form
+                class="task-form"
+                id="taskForm"
+                novalidate
+            >
+
+                <input
+                    type="hidden"
+                    id="taskId"
+                    name="taskId"
+                >
+
+
+                <!-- Title -->
+
+                <div class="form-field">
+
+                    <label
+                        for="taskTitle"
+                        class="form-label"
+                    >
+                        Task title
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        name="taskTitle"
+                        class="form-input"
+                        placeholder="What needs to be done?"
+                        maxlength="120"
+                        required
+                        autocomplete="off"
+                    >
+
+
+                    <span
+                        class="form-error"
+                        id="taskTitleError"
+                        role="alert"
+                    ></span>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-field">
+
+                    <label
+                        for="taskDescription"
+                        class="form-label"
+                    >
+
+                        Description
+
+                        <span class="form-label__optional">
+                            Optional
+                        </span>
+
+                    </label>
+
+
+                    <textarea
+                        id="taskDescription"
+                        name="taskDescription"
+                        class="form-input form-textarea"
+                        placeholder="Add some details..."
+                        maxlength="500"
+                        rows="4"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Priority + Date -->
+
+                <div class="form-row">
+
+
+                    <!-- Priority -->
+
+                    <div class="form-field">
+
+                        <label
+                            for="taskPriority"
+                            class="form-label"
+                        >
+                            Priority
+                        </label>
+
+
+                        <select
+                            id="taskPriority"
+                            name="taskPriority"
+                            class="form-input form-select"
+                        >
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                            <option
+                                value="medium"
+                                selected
+                            >
+                                Medium
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Due Date -->
+
+                    <div class="form-field">
+
+                        <label
+                            for="taskDate"
+                            class="form-label"
+                        >
+                            Due date
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="taskDate"
+                            name="taskDate"
+                            class="form-input"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Actions -->
+
+                <div class="modal__actions">
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelTaskButton"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="saveTaskButton"
+                    >
+
+                        <span class="primary-button__icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M12 5V19M5 12H19"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </span>
+
+
+                        <span id="saveTaskButtonText">
+                            Create Task
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         SORT MENU
+    ========================================== -->
+
+    <div
+        class="dropdown"
+        id="sortMenu"
+        hidden
+    >
+
+        <button
+            type="button"
+            class="dropdown__item"
+            data-sort="newest"
+        >
+            Newest first
+        </button>
+
+
+        <button
+            type="button"
+            class="dropdown__item"
+            data-sort="oldest"
+        >
+            Oldest first
+        </button>
+
+
+        <button
+            type="button"
+            class="dropdown__item"
+            data-sort="priority"
+        >
+            Priority
+        </button>
+
+
+        <button
+            type="button"
+            class="dropdown__item"
+            data-sort="dueDate"
+        >
+            Due date
+        </button>
+
+    </div>
+
+
+    <!-- =========================================
+         TOAST CONTAINER
+    ========================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+
+    <!-- =========================================
+         CONFIRMATION DIALOG
+    ========================================== -->
+
+    <div
+        class="modal modal--small"
+        id="confirmModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirmModalTitle"
+        hidden
+    >
+
+        <div
+            class="modal__backdrop"
+            data-confirm-close
+        ></div>
+
+
+        <div class="modal__container">
+
+            <div class="confirm-dialog">
+
+
+                <!-- Warning Icon -->
+
+                <div class="confirm-dialog__icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M12 3L21 20H3L12 3Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M12 9V13"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                        <circle
+                            cx="12"
+                            cy="16.5"
+                            r="1"
+                            fill="currentColor"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h2
+                    class="confirm-dialog__title"
+                    id="confirmModalTitle"
+                >
+                    Delete this task?
+                </h2>
+
+
+                <p class="confirm-dialog__text">
+                    This action can't be undone.
+                </p>
+
+
+                <div class="modal__actions">
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelDeleteButton"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="danger-button"
+                        id="confirmDeleteButton"
+                    >
+                        Delete Task
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="./utils.js"></script>
+
+    <script src="./storage.js"></script>
+
+    <!-- IMPORTANT: task.js -->
+    <script src="./task.js"></script>
+
+    <script src="./ui.js"></script>
+
+    <script src="./app.js"></script>
+
+</body>
+</html>
